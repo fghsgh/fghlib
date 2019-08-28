@@ -24,8 +24,16 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 These example programs are also included:
 
 - `bigcalc`: big integer calculator (uses `hugeint`)
-- `edit`: a simple text editor (uses `term`)
+- `edit`: a simple text editor (uses `shell`, `term`)
 - `fetch`: send a GET request and write the output to stdout (uses `http`)
-- `kissanime-dl`: download entire anime seasons at once from KissAnime (uses `http`, `regex`, `xml`)
-- `lua`: a Lua interpreter with syntax highlighting and tab autocompletion (uses `regex`, `term`)
-- `search`: search files for a regex (uses `regex`)
+- `kissanime-dl`: download entire anime seasons at once from KissAnime (uses `http`, `regex`, `shell`, `xml`)
+- `lua`: a Lua interpreter with syntax highlighting and tab autocompletion (uses `regex`, `shell`, `term`)
+- `search`: search the content of files for a regex (uses `regex`, `shell`)
+
+
+## `unicode`
+
+Please look at the `string` section of the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#6.4). All functions there are also available in `unicode`, but it handles the strings as UTF-8. Indexes into the strings are also per character, not per byte. The following function is added:
+
+`unicode.wlen(s):number`\
+This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
