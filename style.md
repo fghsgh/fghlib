@@ -29,8 +29,9 @@ Please respect these when contributing.
 - Functions must be called by using the `()` operator, the syntactic sugar `{}` and `""` is not allowed.
 - The `()` operator for function calls must be directly following the function's name, without a space in between.
 - Binary operators which do not consist of brackets must be surrounded by spaces.
+  - The exception is the `=` in a numeric `for` statement, which does not have any spaces around it.
 - Binary operators which do constist of brackets, must have spaces on the outside, but none on the inside.
-  - The exception is the index operator
+  - The exception is the function call operator and the index operator, `()` and `[]` respectively. These only have a space after them.
 - Unary operators have a space before them, but not after them.
 - Numbers must be written in decimal, unless they have a binary meaning, in which case they must be written in hexadecimal.
 - If a function is defined with a name, the name must come between the function and the arguments of the function.
