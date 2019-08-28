@@ -5,7 +5,7 @@ All of these are for Lua 5.2, but probably also work on Lua 5.3.
 
 All of these work on most Linux installations. On Windows, I can only guarantee that the ones with (no dependencies) will work.
 
-These libraries are distributed under the GPL.
+These libraries are distributed under the GPL. Please read [my code style](style.md) before continuing
 
 - `data`: deflate/inflate, CRC, SHA... (no dependencies)
 - `fs`: more filesystem functionality, like reading directories, getting/setting permissions, modified dates, creating directories, removing files... (needs the standard UNIX programs and `io.popen()`)
