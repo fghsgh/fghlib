@@ -33,7 +33,12 @@ These example programs are also included:
 
 ## `unicode`
 
-Please look at the `string` section of the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#6.4). All functions there are also available in `unicode`, but it handles the strings as UTF-8. Indexes into the strings are also per character, not per byte. The following function is added:
+Please look at the `string` section of the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#6.4). The following functions there are also available in `unicode`, but it handles the strings as UTF-8. Indexes into the strings are also per character, not per byte:
+
+`string.byte()`, `string.char()`, `string.find()`, `string.len()`, `string.lower()`, `string.match()`, `string.reverse()`, `string.sub()`, `string.upper()`\
+In most of these, only indexes into the string matter; these are converted from UTF-8 to bytes before the call to the original string function and back after. Big exceptions are `string.lower()` and `string.upper()`, which actually need to know a little about Unicode to work.
+
+The following function was also added:
 
 `unicode.wlen(s):number`\
 This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
