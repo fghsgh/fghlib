@@ -29,7 +29,7 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 - `edit`: a simple text editor (uses `shell`, `term`)
 - `fetch`: send a GET request and write the output to stdout (uses `http`)
 - `kissanime-dl`: download entire anime seasons at once from KissAnime (uses `http`, `regex`, `shell`, `xml`)
-- `lua`: a Lua interpreter with syntax highlighting and tab autocompletion (uses `regex`, `shell`, `term`)
+- `lua`: a Lua interpreter with syntax highlighting and tab autocompletion (uses `regex`, `shell`, `term`, `unicode`)
 - `search`: search the content of files for a regex (uses `regex`, `shell`)
 
 
