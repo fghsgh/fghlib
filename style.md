@@ -36,7 +36,7 @@ Please respect these when contributing.
 - Numbers must be written in decimal, unless they have a binary meaning, or if they are commonly written in hexadecimal in this use, in which case they must be written in hexadecimal.
   - Examples are character codes and bit masks.
   - `A`-`F` are written in lowercase.
-- If a function is defined with a name, the name must come between the function and the arguments of the function.
+- If a function is defined with a name, the name must come between the function and the arguments of the function, if the syntax allows it (for example, this is impossible inside a table).
 - If a function doesn't have a name, the arguments of the function must come directly after the `function` keyword, with no space in between.
 - If a function's name consists of more than two words, every word from the second onward must be capitalized.
 - If a function's name consists of exactly two words, there is no capitalization.
@@ -44,4 +44,9 @@ Please respect these when contributing.
 - When defining a table with non-numeric fields, each field must come on a new line. The comma separating two fields must come at the end of the previous line. A comma should not be written after the last field.
 - No spaces surround commas.
 - When defining a non-integer number, with no integer part, there should not be a `0` before the `.`.
-- My name is written with a lowercase letter.
+- Choosing variable names: a variable should either:
+  - If its function is hard to describe with a word other than "argument" or "operand", it can be a single letter, like `s` is often used for the main string operand argument to a lot of functions.
+  - If it is used often and it would be inconvenient to type the name every time, a single letter may be used, as long as a comment explains the choice for this letter.
+  - Index variables and variables used in for statements are single-letter variables, starting from `i`, alphabetically going on to `j`, `k`, `l`, and so on for nested loops.
+  - In general, a variable's name follows the same rule as for a function (functions are variables, after all).
+- My name is written `fghsgh`, not `Fghsgh`, `FGHSGH`, or any other capitalization.
