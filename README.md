@@ -37,16 +37,17 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 ### `unicode`
 Please look at the `string` section of the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#6.4). The following functions there are also available in `unicode`, but it handles the strings as UTF-8. Indexes into the strings are also per character, not per byte:
 
-`string.byte()`, `string.char()`, `string.find()`, `string.len()`, `string.lower()`, `string.match()`, `string.reverse()`, `string.sub()`, `string.upper()`\
+`string.byte()`, `string.char()`, `string.find()`, `string.len()`, `string.lower()`, `string.match()`, `string.reverse()`, `string.sub()`, `string.upper()`
+
 In most of these, only indexes into the string matter; these are converted from UTF-8 to bytes before the call to the original string function and back after. Big exceptions are `string.lower()` and `string.upper()`, which actually need to know a little about Unicode to work.
 
 The following functions were also added:
 
 `unicode.strToUTF(s,i):number`\
-Converts a byte-oriented index to a character-oriented index. `s` is the string in which to look for the character, `i` is the byte-oriented index.
+Converts a byte-oriented index to a character-oriented index. `s` is the string in which to look for the character, `i` is the byte-oriented index. `i` can point to any byte of the character.
 
 `unicode.utfToStr(s,i):number`\
-Converts a character-oriented index to a byte-oriented index. This is the reverse of `unicode.strToUTF()`.
+Converts a character-oriented index to a byte-oriented index. This is the reverse of `unicode.strToUTF()`. It returns the index of the first byte of the character.
 
 `unicode.wlen(s):number`\
 This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
