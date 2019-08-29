@@ -33,7 +33,9 @@ Please respect these when contributing.
 - Binary operators which do constist of brackets, must have spaces on the outside, but none on the inside.
   - The exception is the function call operator and the index operator, `()` and `[]` respectively. These only have a space after them.
 - Unary operators have a space before them, but not after them.
-- Numbers must be written in decimal, unless they have a binary meaning, in which case they must be written in hexadecimal.
+- Numbers must be written in decimal, unless they have a binary meaning, or if they are commonly written in hexadecimal in this use, in which case they must be written in hexadecimal.
+  - Examples are character codes and bit masks.
+  - `A`-`F` are written in lowercase.
 - If a function is defined with a name, the name must come between the function and the arguments of the function.
 - If a function doesn't have a name, the arguments of the function must come directly after the `function` keyword, with no space in between.
 - If a function's name consists of more than two words, every word from the second onward must be capitalized.
