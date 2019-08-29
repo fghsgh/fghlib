@@ -52,6 +52,8 @@ Converts a character-oriented index to a byte-oriented index. This is the revers
 `unicode.wlen(s):number`\
 This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
 
+All functions are undefined if the string is not validly UTF-8 encoded.
+
 #### Planned features
 `unicode.mode(mode):number`\
 Allows change between UTF-8, UTF-16BE, UTF-16LE, UTF-32BE, and UTF-32LE. All other functions follow this. The argument is one of the numbers `8`, `16`, and `32`. Use a negative number for BE instead of LE. `-8` has the same behaviour as `8`. The returned value is what the mode was before this function was called. The default for `mode` is the current mode, so call `unicode.mode()` without arguments to get the current mode.
