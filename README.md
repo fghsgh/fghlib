@@ -38,7 +38,13 @@ Please look at the `string` section of the [Lua Reference Manual](https://www.lu
 `string.byte()`, `string.char()`, `string.find()`, `string.len()`, `string.lower()`, `string.match()`, `string.reverse()`, `string.sub()`, `string.upper()`\
 In most of these, only indexes into the string matter; these are converted from UTF-8 to bytes before the call to the original string function and back after. Big exceptions are `string.lower()` and `string.upper()`, which actually need to know a little about Unicode to work.
 
-The following function was also added:
+The following functions were also added:
+
+`unicode.strToUTF(s,i):number`\
+Converts a byte-oriented index to a character-oriented index. `s` is the string in which to look for the character, `i` is the byte-oriented index.
+
+`unicode.utfToStr(s,i):number`\
+Converts a character-oriented index to a byte-oriented index. This is the reverse of `unicode.strToUTF()`.
 
 `unicode.wlen(s):number`\
 This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
