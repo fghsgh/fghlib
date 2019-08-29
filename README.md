@@ -14,7 +14,7 @@ These libraries are distributed under the GPL. Please read [my code style](style
 - `data`: deflate/inflate, CRC, SHA... (no dependencies)
 - `fs`: more filesystem functionality, like reading directories, getting/setting permissions, modified dates, creating directories, removing files... (needs the standard UNIX programs and `io.popen()`)
 - `http`: HTTP GET/POST using CURL (needs CURL and `io.popen()`)
-- `hugeint`: infinite-width integers, implemented using tables and metamethods (no dependencies)
+- `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies)
 - `parallel`: running multiple Lua functions simultaneously, through the use of the coroutine and debug libraries, this is not real multithreading, though (no dependencies)
 - `regex`: regular expressions (standard, extended, and Perl) (no dependencies)
 - `shell`: running shell commands with escaped arguments and POSIX-compliant getopt (no dependencies)
