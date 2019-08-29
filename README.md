@@ -55,7 +55,7 @@ Converts a character-oriented index to a byte-oriented index. This is the revers
 All functions are undefined if the string is not validly UTF-8 encoded.
 
 #### Known bugs
-- `unicode.lower()` and `unicode.upper()` don't work. This bug is still being researched.
+- `unicode.lower()` and `unicode.upper()` don't work. This bug is still being researched. The data they use (Unicode character blocks) are also incomplete.
 
 #### Planned features
 `unicode.mode(mode):number`\
