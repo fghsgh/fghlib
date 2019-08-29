@@ -34,6 +34,7 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 
 
 ## Library documentation
+This is not on a wiki because this repository was originally private and I didn't have premium.
 ### `unicode`
 Please look at the `string` section of the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#6.4). The following functions there are also available in `unicode`, but it handles the strings as UTF-8. Indexes into the strings are also per character, not per byte:
 
