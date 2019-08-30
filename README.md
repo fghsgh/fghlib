@@ -5,7 +5,7 @@ All of these are written for Lua 5.2, but also work on Lua 5.3 unless stated oth
 
 All of these work on most Linux installations. On Windows, I can only guarantee that the ones with `(no dependencies)` will work.
 
-These libraries are distributed under the GPL. Please read [my code style](style.md) before contributing.
+These libraries are distributed under the GPL. Please read [my code style](style.md) before contributing. Also, sometimes I use some quirky properties of Lua, so a full read of the [Reference Manual](https://www.lua.org/manual/5.2/) is recommended.
 
 ## Currently implemented
 - `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies) [(documentation)](#hugeint)
@@ -39,6 +39,7 @@ This is not on a wiki because this repository was originally private and I didn'
 ### `hugeint`
 This library simulates the creation of a new type called `hugeint`. This is an infinite-width integer. It overloads all standard operators to handle hugeints just like regular numbers. Hugeints are stored internally as a table with a private field, which can only be accessed by means of the `next()` function, because this function, sadly, doesn't care about metatables.
 
+#### Methods
 `hugeint.create(number,base):hugeint`\
 Creates a hugeint out of the given number. If it is not a whole number, it is rounded towards zero. The input can also be a string, but in that case, it must denote a whole number. The string will not be converted to a number before being converted to a hugeint. The string can be in a different base, just like with `tonumber()`. If `number` is a hugeint, a copy of it is returned.
 
@@ -46,25 +47,32 @@ Creates a hugeint out of the given number. If it is not a whole number, it is ro
 Performs an integer division and returns both the result and the remainder. This is better than calculating the two of them separately, because that would require the operation to be performed twice.
 
 `hugeint.format(hugeint,format):string`\
-Formats a hugeint similarily to `string.format()`, but the format string only allows one formatting specifier, which also has to be one of `d`, `o`, `x`, and `X`. The formatting specifier cannot be preceded by a `%` and no other characters can occur in the string. Flags are still supported, except for the `*` flag. Also, note that the order of arguments is the other way around in this function. This is so that an object-oriented syntax can be used (`number:format("02X")`).
+Formats a hugeint similarily to `string.format()`, but the format string only allows one formatting specifier, which also has to be one of `d`, `o`, `x`, and `X`. The formatting specifier cannot be preceded by a `%` and no other characters can occur in the string. Flags are still supported, except for the `*` flag. Also, note that the order of arguments is the other way around in this function. This is so that an object-oriented syntax can be used (`number:format("02X")` instead of `hugeint.format(number,"02X")`).
 
 `hugeint.ishugeint(hugeint):boolean`\
 Returns whether the given value is a hugeint or not.
+
+`hugeint.tonumber(hugeint):number`\
+Converts a hugeint into a number. Sadly, a `__tonumber` metamethod doesn't exist, so this is the alternative.
 
 `hugeint.meta`\
 The metatable used for hugeints. This metatable defines the following operations:
 - `+`, `-`, `*`, `/`, `%`, `^`, unary `-`: these do what they are expected to. A second argument which is convertible to a hugeint will be converted to a hugeint. The result is always a hugeint. If the second argument is not convertible to a hugeint, an error is thrown.
 - `..`: this applies `tostring()` first.
-- `#`: throws an error.
+- `#`: throws an error with a message `attempt to get length of a hugeint value`.
 - `==`, `~=`: compares the hugeints numerically, but doesn't convert numbers or strings to hugeints.
 - `<`, `<=`, `>`, `>=`: first converts, then compares.
 - `[]` (index): refers to the `hugeint` library table.
 - `()` (call): throws an error with a message `attempt to call a hugeint value`.
 - `ipairs()`, `pairs()`: throws an error.
 - `tostring()`: converts a hugeint to a string, like it is expected.
-The following apply to Lua 5.3 only:
+
+The following apply to Lua 5.3 only (but they can be accessed by, for example, `hugeint.meta.__band()` in Lua 5.2):
 - `//`: same as `/`, as the result is already an integer.
 - `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations.
+
+#### Known bugs
+None (yet).
 
 ### `unicode`
 
