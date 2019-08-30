@@ -17,9 +17,9 @@ Please respect these when contributing. You can of course use your own style for
   - A line break.
   - Library `require()`s, in alphabetical order.
   - A line break.
-  - Any local variables to the entire library.
-  - A line break.
   - The declaration of the library's table.
+  - A line break.
+  - Any global variables to the entire library (these are not actually global, but local in the scope of the file).
   - A line break.
   - All local functions used by the library. Each function is separated with a line break and has a comment above it describing its function.
   - A line break.
