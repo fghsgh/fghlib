@@ -41,7 +41,7 @@ This library simulates the creation of a new type called `hugeint`. This is an i
 
 #### Methods
 `hugeint.create(number,base):hugeint`\
-Creates a hugeint out of the given number. If it is not a whole number, it is rounded towards zero. The input can also be a string, but in that case, it must denote a whole number. The string will not be converted to a number before being converted to a hugeint. The string can be in a different base, just like with `tonumber()`. If `number` is a hugeint, a copy of it is returned.
+Creates a hugeint out of the given number. If it is not a whole number, it is rounded towards zero. The input can also be a string, but in that case, it must represent a whole number. It can start with a `-` though. The string will not be converted to a number before being converted to a hugeint. The string can be in a different base, just like with `tonumber()`. If `number` is a hugeint, a copy of it is returned.
 
 `hugeint.div(a,b):hugeint,hugeint`\
 Performs an integer division and returns both the result and the remainder. This is better than calculating the two of them separately, because that would require the operation to be performed twice.
@@ -67,12 +67,15 @@ The metatable used for hugeints. This metatable defines the following operations
 - `ipairs()`, `pairs()`: throws an error.
 - `tostring()`: converts a hugeint to a string, like it is expected.
 
-The following apply to Lua 5.3 only (but they can be accessed by, for example, `hugeint.meta.__band()` in Lua 5.2):
+The following apply to Lua 5.3 only (but their metamethods can be used directly in Lua 5.2):
 - `//`: same as `/`, as the result is already an integer.
-- `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations.
 
 #### Known bugs
 None (yet).
+
+#### Planned features
+These operators (only exist in Lua 5.3, but their metamethods can be used directly in Lua 5.2):\
+- `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations. Important to note is that these operators will handle negative numbers as two's complement, which means that negative numbers will (virtually) be extended infinitely to the left, with all `1`s. These are of course not factually stored.
 
 ### `unicode`
 
@@ -81,7 +84,7 @@ Please look at the `string` section of the [Lua Reference Manual](https://www.lu
 
 `string.byte()`, `string.char()`, `string.find()`, `string.len()`, `string.lower()`, `string.match()`, `string.reverse()`, `string.sub()`, `string.upper()`
 
-In most of these, only indexes into the string matter; these are converted from UTF-8 to bytes before the call to the original string function and back after. Big exceptions are `string.lower()` and `string.upper()`, which actually need to know a little about Unicode to work. As long as fghlib is maintained, these will be updated to handle new characters.
+In most of these, only indexes into the string matter; these are converted from UTF-8 to bytes before the call to the original string function and back after. Big exceptions are `string.lower()` and `string.upper()`, which actually need to know a little about Unicode to work. As long as fghlib is maintained, these two will be updated to handle any new characters.
 
 The following functions were also added:
 
@@ -91,14 +94,20 @@ Converts a byte-oriented index to a character-oriented index. `s` is the string 
 `unicode.utfToStr(s,i):number`\
 Converts a character-oriented index to a byte-oriented index. This is the reverse of `unicode.strToUTF()`. It returns the index of the first byte of the character.
 
-All functions are undefined if the string is not validly UTF-8 encoded.
+All functions' behaviour is undefined if the string is not validly UTF-8 encoded.
 
 #### Known bugs
 - `unicode.lower()` and `unicode.upper()` don't work. This bug is still being researched. The data they use (Unicode character blocks) are also incomplete.
 
 #### Planned features
+`unicode.conv(s,mode):string`\
+Converts `s`, a string which is encoded in the mode `mode`, into the currently set mode by `unicode.mode()`.
+
 `unicode.mode(mode):number`\
 Allows change between UTF-8, UTF-16BE, UTF-16LE, UTF-32BE, and UTF-32LE. All other functions follow this. The argument is one of the numbers `8`, `16`, and `32`. Use a negative number for BE instead of LE. `-8` has the same behaviour as `8`. The returned value is what the mode was before this function was called. The default for `mode` is the current mode, so call `unicode.mode()` without arguments to get the current mode.
+
+`unicode.valid(s):boolean`\
+Returns `true` if `s` is validly encoded in the currently set UTF mode. Returns `false` if it's not.
 
 `unicode.wlen(s):number`\
 This returns a number, the number of character spaces the string would take up on the screen. For example, `"ツ"` returns `2`, while `"a"` returns `1`.
