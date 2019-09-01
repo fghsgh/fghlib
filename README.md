@@ -8,6 +8,7 @@ All of these work on most Linux installations. On Windows, I can only guarantee 
 These libraries are distributed under the GPL. Please read [my code style](style.md) before contributing. Also, sometimes I use some quirky properties of Lua, so a full read of the [Reference Manual](https://www.lua.org/manual/5.2/) is recommended.
 
 ## Currently implemented
+- `debug2`: for use in the Lua interpreter, an interface to the standard `debug` library (no dependencies) [(documentation)](#debug2)
 - `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies) [(documentation)](#hugeint)
 - `unicode`: utf-8 port of the string library, using the string library (no dependencies) [(documentation)](#unicode)
 
@@ -36,21 +37,33 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 ## Library documentation
 This is not on a wiki because this repository was originally private and I didn't have premium.
 
+### `debug2`
+
+#### Methods
+`debug2.listenv(f):f`\
+Returns an iterator over all environment variables of the given function.
+
+`debug2.getenv(f,name):any`\
+Gets the environment variable of the given function with the given name.
+
 ### `hugeint`
 This library simulates the creation of a new type called `hugeint`. This is an infinite-width integer. It overloads all standard operators to handle hugeints just like regular numbers. Hugeints are stored internally as a table with a private field, which can only be accessed by means of the `next()` function, because this function, sadly, doesn't care about metatables.
 
 #### Methods
+`hugeint.abs(hugeint):hugeint`\
+Returns the absolute value of the given `hugeint`.
+
 `hugeint.create(number,base):hugeint`\
-Creates a hugeint out of the given number. If it is not a whole number, it is rounded towards zero. The input can also be a string, but in that case, it must represent a whole number. It can start with a `-` though. The string will not be converted to a number before being converted to a hugeint. The string can be in a different base, just like with `tonumber()`. If `number` is a hugeint, a copy of it is returned.
+Creates a hugeint out of the given number. If it is not a whole number, it is rounded towards negative infinity. The input can also be a string, but in that case, it must represent a whole number. It can start with a `-` though. The string will not be converted to a number before being converted to a hugeint. The string can be in a different base, just like with `tonumber()`. In that case, the base is assumed to be `base`. If `number` is a hugeint, a copy of it is returned.
 
 `hugeint.div(a,b):hugeint,hugeint`\
 Performs an integer division and returns both the result and the remainder. This is better than calculating the two of them separately, because that would require the operation to be performed twice.
 
-`hugeint.format(hugeint,format):string`\
-Formats a hugeint similarily to `string.format()`, but the format string only allows one formatting specifier, which also has to be one of `d`, `o`, `x`, and `X`. The formatting specifier cannot be preceded by a `%` and no other characters can occur in the string. Flags are still supported, except for the `*` flag. Also, note that the order of arguments is the other way around in this function. This is so that an object-oriented syntax can be used (`number:format("02X")` instead of `hugeint.format(number,"02X")`).
-
 `hugeint.ishugeint(hugeint):boolean`\
 Returns whether the given value is a hugeint or not.
+
+`hugeint.sqrt(n):hugeint`\
+Calculates the square root of the input (rounded down), and throws an error for strictly negative numbers.
 
 `hugeint.tonumber(hugeint):number`\
 Converts a hugeint into a number. Sadly, a `__tonumber` metamethod doesn't exist, so this is the alternative.
@@ -71,11 +84,14 @@ The following apply to Lua 5.3 only (but their metamethods can be used directly 
 - `//`: same as `/`, as the result is already an integer.
 
 #### Known bugs
-None (yet).
+- The multiplication and division routines only work for numbers smaller than 256, and are being debugged.
 
 #### Planned features
+`hugeint.format(hugeint,format):string`\
+Formats a hugeint similarily to `string.format()`, but the format string only allows one formatting specifier, which also has to be one of `d`, `o`, `x`, and `X`. The formatting specifier cannot be preceded by a `%` and no other characters can occur in the string. Flags are still supported, except for the `*` flag. Also, note that the order of arguments is the other way around in this function. This is so that an object-oriented syntax can be used (`number:format("02X")` instead of `hugeint.format(number,"02X")`).
+
 These operators (only exist in Lua 5.3, but their metamethods can be used directly in Lua 5.2):\
-- `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations. Important to note is that these operators will handle negative numbers as two's complement, which means that negative numbers will (virtually) be extended infinitely to the left, with all `1`s. These are of course not factually stored.
+- `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations. Important to note is that these operators will handle negative numbers as two's complement, which means that negative numbers will (virtually) be extended infinitely to the left, with all `1`s. These `1`s are of course not factually stored.
 
 ### `unicode`
 
