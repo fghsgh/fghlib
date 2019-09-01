@@ -84,7 +84,7 @@ The following apply to Lua 5.3 only (but their metamethods can be used directly 
 - `//`: same as `/`, as the result is already an integer.
 
 #### Known bugs
-- The multiplication and division routines only work for numbers smaller than 256, and are being debugged.
+- The multiplication routine returns a wrong answer. This causes the power routine to do the same.
 
 #### Planned features
 `hugeint.format(hugeint,format):string`\
