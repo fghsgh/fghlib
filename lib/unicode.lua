@@ -1,15 +1,15 @@
 -- unicode library from fghlib (https://github.com/fghsgh/fghlib)
 -- written by fghsgh and released under the GPL
--- warning: parts of this file require UTF-8 support
 -- compatible with Lua 5.2 and Lua 5.3
+-- warning: parts of this file require UTF-8 support
 
 local math = require("math")
 local string = require("string")
 local table = require("table")
 
-local unidata = {} -- will be filled below function definitions
-
 local unicode = {}
+
+local unidata = {} -- will be filled below function definitions
 
 -- throws an error with a message describing a bad argument type
 local function errorarg(n,exp,got) -- n = number of argument, exp = expected type, got = gotten type
