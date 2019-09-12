@@ -8,6 +8,7 @@ All of these work on most Linux installations. On Windows, I can only guarantee 
 These libraries are distributed under the GPL. Please read [my code style](style.md) before contributing. Also, sometimes I use some quirky properties of Lua, so a full read of the [Reference Manual](https://www.lua.org/manual/5.2/) is recommended.
 
 ## Currently implemented
+- `complex`: complex number type (no dependencies) [(documentation)](#complex)
 - `debug2`: for use in the Lua interpreter, an interface to the standard `debug` library (no dependencies) [(documentation)](#debug2)
 - `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies) [(documentation)](#hugeint)
 - `unicode`: utf-8 port of the string library, using the string library (no dependencies) [(documentation)](#unicode)
@@ -17,6 +18,7 @@ These libraries are distributed under the GPL. Please read [my code style](style
 - `fs`: more filesystem functionality, like reading directories, getting/setting permissions, modified dates, creating directories, removing files... (needs the standard UNIX programs and `io.popen()`)
 - `http`: HTTP GET/POST using CURL (needs CURL and `io.popen()`)
 - `parallel`: running multiple Lua functions simultaneously, through the use of the coroutine library and a hack using garbage collection and metatables. This is not real multithreading, though (no dependencies)
+- `quat`: quaternion number type (no dependencies)
 - `regex`: regular expressions (standard, extended, and Perl) (no dependencies)
 - `shell`: running shell commands with escaped arguments and POSIX-compliant getopt (no dependencies)
 - `term`: ncurses-like library (needs the `stty` program, `termcap`, `unicode`, and `io.popen()`)
@@ -36,6 +38,57 @@ The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `sh
 
 ## Library documentation
 This is not on a wiki because this repository was originally private and I didn't have premium.
+
+### `complex`
+A complex number can be indexed using the keys `"real"` and `"imag"` to read and change the real and imaginary components, but setting them can throw an error if the assigned value is not a number.
+
+One note is that when the `^` operator is used to calculate roots, the primary root is returned.
+
+#### Methods
+`complex.abs(c):number`\
+Calculates the absolute value of the given complex number.
+
+`complex.acos(c):complex`\
+Calculates the arc cosine of the given complex number.
+
+`complex.angle(c):number`\
+Returns the angle between the given complex number and the positive real axis, in radians. This angle is in the interval ]-π,π]. `0` is returned for `0`.
+
+`complex.asin(c):complex`\
+Calculates the arc sine of the given complex number.
+
+`complex.conj(c):complex`\
+Returns the complex conjugate of the given complex number.
+
+`complex.cos(c):complex`\
+Calculates the cosine of the given complex number.
+
+`complex.create(real,imag,polar):complex`\
+Creates a complex number from a real part and an imaginary part. If `polar` is true, the number is given in polar form. That is, `real` is the absolute value, and `imag` is the angle in radians. `imag` defaults to `0`, `polar` defaults to `false`.
+
+`complex.exp(c):complex`\
+Raises the mathematical constant `e` to the power of the given complex number.
+
+`complex.i`\
+Equal to the value of `i`.
+
+`complex.iscomplex(c):boolean`\
+Returns whether the given value is a complex number or not.
+
+`complex.log(c,base):c`\
+Returns the principal logarithm of `c` with base `base`. `base` defaults to the mathematical constant `e`.
+
+`complex.meta`\
+The metatable used for the complex number type. This metatable implements all arithmetic operations except for `%` and `//` (Lua 5.3 only). Indexing can be used to both access the `complex` library's table, and to access the real and imaginary parts of the number.
+
+`complex.sin(c):complex`\
+Calculates the sine of the given complex number.
+
+`complex.sqrt(c):complex`\
+Calculates one of the square roots of the given complex number. The returned square root is the one with a positive real component.
+
+`complex.tan(c):complex`\
+Calculates the tangent of the given complex number.
 
 ### `debug2`
 
