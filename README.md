@@ -41,11 +41,12 @@ The above happened because `complex.i` is a table with a metatable. Now, `comple
 
 The full list of libraries with no dependencies: `complex`, `data`, `debug2`, `hugeint`, `quat`, `regex`, `unicode`, `xml`.
 
+
 ## Planned example programs
 - `bigcalc`: big integer calculator (uses `hugeint`)
+- `cpxcalc`: complex number calculator (uses `complex`)
 - `edit`: a simple text editor (uses `shell`, `term`)
 - `fetch`: send a GET request and write the output to stdout (uses `http`)
-- `kissanime-dl`: download entire anime seasons at once from KissAnime (uses `http`, `regex`, `shell`, `xml`)
 - `lua`: a Lua interpreter with syntax highlighting and tab autocompletion (uses `regex`, `shell`, `term`, `unicode`)
 - `search`: search the content of files for a regex (uses `regex`, `shell`)
 
@@ -118,6 +119,10 @@ Returns an iterator over all environment variables of the given function.
 
 `debug2.reload(name):any`\
 Unloads the given module name, then requires it again and returns the result.
+
+#### Planned features
+- Stepping line-by-line through threads, without having to deal with hooks.
+- Getting/setting local variables at the current point of execution.
 
 ### `hugeint`
 This library simulates the creation of a new type called `hugeint`. This is an infinite-width integer. It overloads all standard operators to handle hugeints just like regular numbers. Hugeints are stored internally as a table with a private field, which can only be accessed by means of the `next()` function, because this function, sadly, doesn't care about metatables.
