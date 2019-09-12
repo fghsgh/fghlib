@@ -93,11 +93,14 @@ Calculates the tangent of the given complex number.
 ### `debug2`
 
 #### Methods
+`debug2.getenv(f,name):any`\
+Gets the environment variable of the given function with the given name.
+
 `debug2.listenv(f):f`\
 Returns an iterator over all environment variables of the given function.
 
-`debug2.getenv(f,name):any`\
-Gets the environment variable of the given function with the given name.
+`debug2.reload(name):any`\
+Unloads the given module name, then requires it again and returns the result.
 
 ### `hugeint`
 This library simulates the creation of a new type called `hugeint`. This is an infinite-width integer. It overloads all standard operators to handle hugeints just like regular numbers. Hugeints are stored internally as a table with a private field, which can only be accessed by means of the `next()` function, because this function, sadly, doesn't care about metatables.
