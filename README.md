@@ -90,6 +90,9 @@ Calculates one of the square roots of the given complex number. The returned squ
 `complex.tan(c):complex`\
 Calculates the tangent of the given complex number.
 
+#### Planned features
+- `complex.atan(c):complex`: it is already implemented, but doesn't work.
+
 ### `debug2`
 
 #### Methods
@@ -141,12 +144,13 @@ The following apply to Lua 5.3 only (but their metamethods can be used directly 
 
 #### Known bugs
 - The multiplication routine returns a wrong answer. This causes the power routine to do the same.
+- `hugeint.sqrt()` returns a wrong answer.
 
 #### Planned features
 `hugeint.format(hugeint,format):string`\
 Formats a hugeint similarily to `string.format()`, but the format string only allows one formatting specifier, which also has to be one of `d`, `o`, `x`, and `X`. The formatting specifier cannot be preceded by a `%` and no other characters can occur in the string. Flags are still supported, except for the `*` flag. Also, note that the order of arguments is the other way around in this function. This is so that an object-oriented syntax can be used (`number:format("02X")` instead of `hugeint.format(number,"02X")`).
 
-These operators (only exist in Lua 5.3, but their metamethods can be used directly in Lua 5.2):\
+These operators (only exist in Lua 5.3, but their metamethods can still be used directly in Lua 5.2):\
 - `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations. Important to note is that these operators will handle negative numbers as two's complement, which means that negative numbers will (virtually) be extended infinitely to the left, with all `1`s. These `1`s are of course not factually stored.
 
 ### `unicode`
