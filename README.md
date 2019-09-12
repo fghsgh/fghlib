@@ -107,6 +107,7 @@ Calculates the tangent of the given complex number.
 
 #### Planned features
 - `complex.atan(c):complex`: it is already implemented, but doesn't work.
+- Hyperbolic trigonometry functions
 
 ### `debug2`
 
