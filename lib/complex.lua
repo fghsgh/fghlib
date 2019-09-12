@@ -15,7 +15,7 @@ local function errorarg(n,exp,got,lvl) -- n = number of argument, exp = expected
   error("bad argument #" .. tostring(n) .. ": " .. exp .. " expected, got " .. got,3 + (lvl or 0))
 end
 
--- make a new complex, given data string and sign
+-- make a new complex, given real and imag
 local function create(real,imag)
   return setmetatable({
     [private] = {
@@ -53,9 +53,7 @@ local function checkarg(a,b)
 end
 
 function complex.abs(c)
-  if not complex.iscomplex(c) then
-    errorarg(1,"complex",type(c))
-  end
+  c = checkarg(c,0)
 
   return math.sqrt(c[private].real * c[private].real + c[private].imag * c[private].imag)
 end
