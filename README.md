@@ -9,9 +9,9 @@ These libraries are distributed under the GPL. Please read [my code style](style
 
 ## Currently implemented
 - `complex`: complex number type (no dependencies) [(documentation)](#complex)
-- `debug2`: for use in the Lua interpreter, an interface to the standard `debug` library (no dependencies) [(documentation)](#debug2)
+- `debug2`: an interface to the standard `debug` library for use in the Lua interpreter (no dependencies) [(documentation)](#debug2)
 - `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies) [(documentation)](#hugeint)
-- `unicode`: utf-8 port of the string library, using the string library (no dependencies) [(documentation)](#unicode)
+- `unicode`: UTF-8 port of the string library, using the string library (no dependencies) [(documentation)](#unicode)
 
 ## Planned
 - `data`: deflate/inflate, CRC, SHA... (no dependencies)
@@ -25,7 +25,7 @@ These libraries are distributed under the GPL. Please read [my code style](style
 - `termcap`: termcap reader, this can do basic stuff like setting the text color or cursor position (needs the termcap database)
 - `xml`: XML parsing (no dependencies)
 
-The full list of libraries with no dependencies: `data`, `hugeint`, `regex`, `shell`, `unicode`, `xml`.
+The full list of libraries with no dependencies: `complex`, `data`, `debug2`, `hugeint`, `quat`, `regex`, `unicode`, `xml`.
 
 ## Planned example programs
 - `bigcalc`: big integer calculator (uses `hugeint`)
