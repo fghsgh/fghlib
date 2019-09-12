@@ -3,9 +3,23 @@ This is a collection of pure Lua libraries, for those of you who don't want to i
 
 All of these are written for Lua 5.2, but also work on Lua 5.3 unless stated otherwise.
 
-All of these work on most Linux installations. On Windows, I can only guarantee that the ones with `(no dependencies)` will work.
+All of these work on most Linux installations. On Windows, I can only guarantee that the ones with `(no dependencies)` will work (and those with only other dependencies from this collection of libraries).
 
+### Contributing
 These libraries are distributed under the GPL. Please read [my code style](style.md) before contributing. Also, sometimes I use some quirky properties of Lua, so a full read of the [Reference Manual](https://www.lua.org/manual/5.2/) is recommended.
+
+## Installation
+Download all libraries from the [lib directory](lib) that you want, plus their dependencies, if any. Put the downloaded libraries in any directory of your Lua path. Check your path using `=package.path` in the Lua interpreter. You can change the Lua path by changing the `LUA_PATH` environment variable as defined in the [Lua Reference Manual](https://www.lua.org/manual/5.2/manual.html#pdf-package.path).
+
+Load a library using `local NAME = require("NAME")`. You can also run the file using `dofile()`, but if you use the `dofile()` method more than once, undefined behaviour may occur, for example in this piece of code:
+```lua
+local complex1 = dofile("complex.lua")
+local complex2 = dofile("complex.lua")
+
+print(complex1.i * complex2.i)
+-- throws error "bad argument #2: complex expected, got table"
+```
+The above happened because `complex.i` is a table with a metatable. Now, `complex1.i` and `complex2.i` have different metatables and a different `private` field, which makes them distinct. `complex1` can only work with other `complex1` types, not with `complex2`. Therefore, it wasn't recognized as a complex number, but as a table (which it, in fact, is).
 
 ## Currently implemented
 - `complex`: complex number type (no dependencies) [(documentation)](#complex)
