@@ -31,7 +31,6 @@ The above happened because `complex.i` is a table with a metatable. Now, `comple
 - `data`: deflate/inflate, CRC, SHA... (no dependencies)
 - `fs`: more filesystem functionality, like reading directories, getting/setting permissions, modified dates, creating directories, removing files... (needs the standard UNIX programs and `io.popen()`)
 - `http`: HTTP GET/POST using CURL (needs CURL and `io.popen()`)
-- `parallel`: running multiple Lua functions simultaneously, through the use of the coroutine and debug library. This is not real multithreading, though (no dependencies)
 - `regex`: regular expressions (standard, extended, and Perl) (no dependencies)
 - `shell`: running shell commands with escaped arguments and POSIX-compliant getopt (no dependencies)
 - `term`: ncurses-like library (needs the `stty` program, `termcap`, `unicode`, and `io.popen()`)
