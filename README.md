@@ -31,15 +31,14 @@ The above happened because `complex.i` is a table with a metatable. Now, `comple
 - `data`: deflate/inflate, CRC, SHA... (no dependencies)
 - `fs`: more filesystem functionality, like reading directories, getting/setting permissions, modified dates, creating directories, removing files... (needs the standard UNIX programs and `io.popen()`)
 - `http`: HTTP GET/POST using CURL (needs CURL and `io.popen()`)
-- `parallel`: running multiple Lua functions simultaneously, through the use of the coroutine library and a hack using garbage collection and metatables. This is not real multithreading, though (no dependencies)
-- `quat`: quaternion number type (no dependencies)
+- `parallel`: running multiple Lua functions simultaneously, through the use of the coroutine and debug library. This is not real multithreading, though (no dependencies)
 - `regex`: regular expressions (standard, extended, and Perl) (no dependencies)
 - `shell`: running shell commands with escaped arguments and POSIX-compliant getopt (no dependencies)
 - `term`: ncurses-like library (needs the `stty` program, `termcap`, `unicode`, and `io.popen()`)
 - `termcap`: termcap reader, this can do basic stuff like setting the text color or cursor position (needs the termcap database)
 - `xml`: XML parsing (no dependencies)
 
-The full list of libraries with no dependencies: `complex`, `data`, `debug2`, `hugeint`, `quat`, `regex`, `unicode`, `xml`.
+The full list of libraries with no dependencies: `complex`, `data`, `debug2`, `hugeint`, `regex`, `unicode`, `xml`.
 
 
 ## Planned example programs
