@@ -178,10 +178,12 @@ The split library was originally not part of the fghlib project, but I decided t
 
 ```
 This library consists of a single function (not a table!):
+
 Depending on the type of the second argument, the next arguments will be
 understood differently. The returned value will always be a numeric table
 containing a list of strings. An error will be thrown if any invalid arguments
 are passed.
+
   - The second argument is a string: split(string,delim,plain,include,double):
     The string is split on every occurence of the substring delim. If plain is
     true, no pattern-matching will occur (otherwise, standard Lua patterns are
@@ -189,12 +191,16 @@ are passed.
     every part (except the last one of course). If double is true, any double
     occurences of a delimiter will be ignored. This will throw an error if both
     include and double are true.
+
   - The second argument is a number: split(string,chars,utf8):
     The string is split into equal substrings of chars characters. The last part
     may be shorter than the others. If utf8 is true, the character count will be
     UTF-8-aware. Behavior is undefined if the passed string is not UTF-8 valid.
+
+
 In both cases, the first argument (a string) is split into multiple substrings,
 which are returned as a table.
+
 examples:
 split("a  %sb c","%s")                  -> {"a","","%sb","c"}
 split("a  %sb c","%s",true)             -> {"a  ","b c"}
