@@ -201,7 +201,8 @@ split("a  %sb c","%s",true)             -> {"a  ","b c"}
 split("a  %sb c","%s",false,true)       -> {"a "," ","b ","c"}
 split("a  %sb c","%s",true,true)        -> {"a  %s","b c"}
 split("a  %sb c","%s",false,false,true) -> {"a","b","c"}
-split("a  %sb c",3)                     -> {"a  ","%sb"," c"}```
+split("a  %sb c",3)                     -> {"a  ","%sb"," c"}
+```
 
 ### `unicode`
 
