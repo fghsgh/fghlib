@@ -25,6 +25,7 @@ The above happened because `complex.i` is a table with a metatable. Now, `comple
 - `complex`: complex number type (no dependencies) [(documentation)](#complex)
 - `debug2`: an interface to the standard `debug` library for use in the Lua interpreter (no dependencies) [(documentation)](#debug2)
 - `hugeint`: infinite-width integers, implemented using binary strings and metatables (no dependencies) [(documentation)](#hugeint)
+- `split`: split strings into equal length substrings, or using another string as a separator (no dependencies) [(documentation)](#split)
 - `unicode`: UTF-8 port of the string library, using the string library (no dependencies) [(documentation)](#unicode)
 
 ## Planned
@@ -170,6 +171,37 @@ Formats a hugeint similarily to `string.format()`, but the format string only al
 
 These operators (only exist in Lua 5.3, but their metamethods can still be used directly in Lua 5.2):\
 - `&`, `|`, `~`, `~` (unary), `<<`, `>>`: behave as the basic arithmetic operations. Important to note is that these operators will handle negative numbers as two's complement, which means that negative numbers will (virtually) be extended infinitely to the left, with all `1`s. These `1`s are of course not factually stored.
+
+### `split`
+
+The split library was originally not part of the fghlib project, but I decided to add it because it is very useful. The contents of the file also reflect how it is meant to be used standalone, and a full documentation is included in the comment at the beginning of the file.
+
+```
+This library consists of a single function (not a table!):
+Depending on the type of the second argument, the next arguments will be
+understood differently. The returned value will always be a numeric table
+containing a list of strings. An error will be thrown if any invalid arguments
+are passed.
+  - The second argument is a string: split(string,delim,plain,include,double):
+    The string is split on every occurence of the substring delim. If plain is
+    true, no pattern-matching will occur (otherwise, standard Lua patterns are
+    used). If include is true, the delimiter will be included at the end of
+    every part (except the last one of course). If double is true, any double
+    occurences of a delimiter will be ignored. This will throw an error if both
+    include and double are true.
+  - The second argument is a number: split(string,chars,utf8):
+    The string is split into equal substrings of chars characters. The last part
+    may be shorter than the others. If utf8 is true, the character count will be
+    UTF-8-aware. Behavior is undefined if the passed string is not UTF-8 valid.
+In both cases, the first argument (a string) is split into multiple substrings,
+which are returned as a table.
+examples:
+split("a  %sb c","%s")                  -> {"a","","%sb","c"}
+split("a  %sb c","%s",true)             -> {"a  ","b c"}
+split("a  %sb c","%s",false,true)       -> {"a "," ","b ","c"}
+split("a  %sb c","%s",true,true)        -> {"a  %s","b c"}
+split("a  %sb c","%s",false,false,true) -> {"a","b","c"}
+split("a  %sb c",3)                     -> {"a  ","%sb"," c"}```
 
 ### `unicode`
 
