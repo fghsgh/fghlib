@@ -26,9 +26,9 @@ which are returned as a table.
 examples:
 split("a  %sb c","%s")                  -> {"a","","%sb","c"}
 split("a  %sb c","%s",true)             -> {"a  ","b c"}
-split("a  %sb c","%s",false,true)       -> {"a "," ","b ","c"}
+split("a  %sb c","%s",false,true)       -> {"a "," ","%sb ","c"}
 split("a  %sb c","%s",true,true)        -> {"a  %s","b c"}
-split("a  %sb c","%s",false,false,true) -> {"a","b","c"}
+split("a  %sb c","%s",false,false,true) -> {"a","%sb","c"}
 split("a  %sb c",3)                     -> {"a  ","%sb"," c"}
 ]]
 
